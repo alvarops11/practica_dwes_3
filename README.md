@@ -247,3 +247,9 @@ El **índice UNIQUE parcial** y el tratamiento concreto de **SQLSTATE** se inclu
 - Todos los archivos de texto del proyecto están en **UTF-8 sin BOM**.
 
 Entrega los archivos fuente, `docs`, plantillas, SQL, Compose, README, ejemplos de entorno y `package-lock.json`. Excluye `node_modules`, `.env`, `.env.test`, archivos temporales y datos de PostgreSQL. No se ha enviado ni publicado la práctica automáticamente.
+
+## 11. Apoyo de inteligencia artificial
+
+Para realizar la práctica se ha utilizado como apoyo la siguiente conversación con ChatGPT:
+
+- [Conversación de apoyo para la práctica](https://chatgpt.com/share/6b03441c-bcdc-83ed-a56b-5af0b811b334).
