@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= equipo.nombre %> · Detalle del equipo</title>
+</head>
+<body>
+  <header><a href="/equipos">Volver al inventario</a></header>
+  <main>
+    <h1><%= equipo.nombre %></h1>
+    <%# Todos los datos se muestran con = para que EJS escape el HTML. %>
+    <dl>
+      <dt>Código</dt><dd><%= equipo.codigo %></dd>
+      <dt>Categoría</dt><dd><%= equipo.categoria %></dd>
+      <dt>Estado</dt><dd><%= equipo.disponible ? 'Disponible' : 'Prestado' %></dd>
+      <dt>Usuario actual</dt><dd><%= equipo.usuario_actual ?? 'Sin préstamo activo' %></dd>
+    </dl>
+    <h2>Historial de préstamos</h2>
+    <% if (prestamos.length === 0) { %>
+      <p>Este equipo todavía no tiene préstamos registrados.</p>
+    <% } else { %>
+      <p>Las fechas se muestran en UTC.</p>
+      <table>
+        <caption>Préstamos del equipo</caption>
+        <thead><tr><th scope="col">Préstamo</th><th scope="col">Usuario</th><th scope="col">Fecha de préstamo</th><th scope="col">Fecha de devolución</th></tr></thead>
+        <tbody>
+          <% for (const prestamo of prestamos) { %>
+            <tr>
+              <td><%= prestamo.id %></td><td><%= prestamo.usuario %></td>
+              <td><%= prestamo.fecha_prestamo.toISOString() %></td>
+              <td><%= prestamo.fecha_devolucion ? prestamo.fecha_devolucion.toISOString() : 'Pendiente' %></td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+    <% } %>
+  </main>
+  <footer><p>DWES · Práctica UD4</p></footer>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Inventario de equipos</title>
+</head>
+<body>
+  <header><h1>Préstamos de material informático</h1></header>
+  <main>
+    <h2>Inventario de equipos</h2>
+    <form action="/equipos" method="get">
+      <p><label for="nombre">Nombre</label>
+        <input id="nombre" name="nombre" value="<%= filtros.nombre %>" placeholder="Buscar por nombre"></p>
+      <p><label for="categoria">Categoría</label>
+        <select id="categoria" name="categoria">
+          <option value="">Todas</option>
+          <%# Conservamos también una categoría inexistente introducida en la URL. %>
+          <% if (filtros.categoria && !categorias.some(c => c.categoria === filtros.categoria)) { %>
+            <option selected value="<%= filtros.categoria %>"><%= filtros.categoria %></option>
+          <% } %>
+          <% for (const fila of categorias) { %>
+            <option value="<%= fila.categoria %>" <%= filtros.categoria === fila.categoria ? 'selected' : '' %>><%= fila.categoria %></option>
+          <% } %>
+        </select></p>
+      <p><label for="disponible">Estado</label>
+        <select id="disponible" name="disponible">
+          <option value="">Todos</option>
+          <option value="true" <%= filtros.disponible === 'true' ? 'selected' : '' %>>Disponible</option>
+          <option value="false" <%= filtros.disponible === 'false' ? 'selected' : '' %>>Prestado</option>
+        </select></p>
+      <p><label for="orden">Ordenar por</label>
+        <select id="orden" name="orden">
+          <option value="codigo" <%= filtros.orden === 'codigo' ? 'selected' : '' %>>Código</option>
+          <option value="nombre" <%= filtros.orden === 'nombre' ? 'selected' : '' %>>Nombre</option>
+        </select></p>
+      <button type="submit">Buscar</button>
+      <a href="/equipos">Limpiar filtros</a>
+    </form>
+
+    <% if (equipos.length === 0) { %>
+      <p>No hay equipos que mostrar en esta página con los filtros indicados.</p>
+    <% } else { %>
+      <table>
+        <caption>Equipos encontrados (hasta 5 por página)</caption>
+        <thead><tr><th scope="col">Código</th><th scope="col">Nombre</th><th scope="col">Categoría</th><th scope="col">Estado</th></tr></thead>
+        <tbody>
+          <% for (const equipo of equipos) { %>
+            <tr>
+              <td><a href="/equipos/<%= equipo.id %>"><%= equipo.codigo %></a></td>
+              <td><%= equipo.nombre %></td><td><%= equipo.categoria %></td>
+              <td><%= equipo.disponible ? 'Disponible' : 'Prestado' %></td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+    <% } %>
+    <nav aria-label="Paginación">
+      <p>Página <%= filtros.pagina %></p>
+      <% if (filtros.pagina > 1) { %><a href="<%= enlacePagina(filtros.pagina - 1) %>">Anterior</a><% } %>
+      <% if (haySiguiente) { %><a href="<%= enlacePagina(filtros.pagina + 1) %>">Siguiente</a><% } %>
+    </nav>
+  </main>
+  <footer><p>DWES · Práctica UD4</p></footer>
+</body>
+</html>

@@ -1,0 +1,18 @@
+{
+  "name": "practica-prestamos-dwes",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Práctica UD4: préstamos de material informático",
+  "type": "module",
+  "engines": { "node": "24.x" },
+  "scripts": {
+    "start": "node --env-file=.env src/server.mjs",
+    "test": "node --test tests/validacion.test.mjs",
+    "test:integracion": "node --env-file=.env.test scripts/comprobar.mjs"
+  },
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "pg": "^8.16.3"
+  }
+}
