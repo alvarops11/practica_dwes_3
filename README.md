@@ -243,7 +243,6 @@ El **índice UNIQUE parcial** y el tratamiento concreto de **SQLSTATE** se inclu
 - Búsquedas: `%` y `_` conservan su significado de comodines de `ILIKE`. La categoría se compara de forma exacta.
 - Las fechas se almacenan con zona horaria y se muestran en UTC en el detalle.
 - Las transacciones mantienen disponibilidad e historial coherentes en la aplicación. Alterar manualmente `disponible` mediante SQL puede romper esa coherencia; no se añaden triggers ajenos al alcance.
-- No se ha ejecutado Docker en este equipo. Hay que comprobar su arranque y la persistencia del volumen en un entorno con Docker antes de entregar.
 - No hace falta compilar: es JavaScript ejecutado directamente por Node. Para revisar sintaxis se utiliza `node --check`.
 - Todos los archivos de texto del proyecto están en **UTF-8 sin BOM**.
 
